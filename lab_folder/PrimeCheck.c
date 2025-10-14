@@ -12,7 +12,9 @@ bool isPrime(int n) {
 }
 
 int main() {
-    int num = 11;
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
     if (isPrime(num))
         printf("%d is a prime number\n", num);
     else

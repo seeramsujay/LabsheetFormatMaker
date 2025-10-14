@@ -112,29 +112,16 @@ def generate_lab_report():
         # --- Compile and Execute C code ---
         executable_name = os.path.splitext(filename)[0]
         executable_path = os.path.join('output', executable_name)
-        execution_output = "Error: Could not compile or run C code."
 
-        # Compile
+        # --- Compile C code ---
+        executable_name = os.path.splitext(filename)[0]
+        executable_path = os.path.join('output', executable_name)
+        
         compile_result = subprocess.run(
             ['gcc', c_file_path, '-o', executable_path],
             capture_output=True,
             text=True
         )
-
-        if compile_result.returncode != 0:
-            execution_output = f"Compilation Error:\n{compile_result.stderr}"
-        else:
-            # Execute
-            run_result = subprocess.run(
-                [executable_path],
-                capture_output=True,
-                text=True
-            )
-            execution_output = run_result.stdout.strip()
-            
-            # Clean up executable
-            if os.path.exists(executable_path):
-                os.remove(executable_path)
 
         # --- Add testcase table ---
         table = doc.add_table(rows=1, cols=2)
@@ -143,10 +130,33 @@ def generate_lab_report():
         table.columns[1].width = Inches(3.5) # Adjusted width for narrow margins
 
         for j in range(2):
-            val = random.randint(5, 25) 
+            val = random.randint(5, 25)
+            execution_output = "Error: Could not compile or run C code."
+
+            if compile_result.returncode != 0:
+                execution_output = f"Compilation Error:\n{compile_result.stderr}"
+            else:
+                # Execute with input
+                run_result = subprocess.run(
+                    [executable_path],
+                    input=str(val), # Pass the random value as stdin
+                    capture_output=True,
+                    text=True
+                )
+                # Extract only the relevant output (e.g., after "Enter a number: ")
+                program_output_lines = run_result.stdout.strip().split('\n')
+                if program_output_lines and "Enter a number:" in program_output_lines[0]:
+                    execution_output = "\n".join(program_output_lines[1:])
+                else:
+                    execution_output = run_result.stdout.strip()
+            
             cell_text = f"Testcase {j+1}\nInput: {val}\nOutput: {execution_output}"
             cell = table.cell(0, j)
             cell.text = cell_text
+        
+        # Clean up executable after all test cases for this file are done
+        if os.path.exists(executable_path):
+            os.remove(executable_path)
             for paragraph in cell.paragraphs:
                 for run_cell in paragraph.runs:
                     run_cell.font.name = 'Courier New'
