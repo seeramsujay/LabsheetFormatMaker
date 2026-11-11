@@ -1,0 +1,7 @@
+
+Factorial
+*.out
+__pycache__/
+*.pyc
+output/
+
