@@ -1,20 +1,32 @@
-# 📝 LabsheetFormatMaker: C Compilation, Testcase Runner & High-Fidelity Word/PDF Report Generator
+<p align="center">
+  <img src="assets/logo.svg" alt="LabsheetFormatMaker Logo" width="220" />
+</p>
 
-> Instantly convert a folder of raw `.c` files into a beautifully formatted, fully executed, and styled lab report (`.docx`/`.pdf`).
+<h1 align="center">LabsheetFormatMaker</h1>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg?style=flat-square)](https://www.python.org/)
-[![Compilation](https://img.shields.io/badge/Compiler-GCC-darkgreen.svg?style=flat-square)](https://gcc.gnu.org/)
-[![Word Generation](https://img.shields.io/badge/Word--Engine-python--docx-blueviolet.svg?style=flat-square)](https://python-docx.readthedocs.io/)
+<p align="center">
+  <strong>Automated C Code Compilation, Sandboxed Testcase Execution, &amp; Academic Word/PDF Report Generator.</strong>
+</p>
 
-LabsheetFormatMaker is an automated, student-friendly developer tool engineered to **compile, execute, test, and style university programming lab sheets**. Instead of spending hours manually copying code, indenting text, running programs, taking screenshots, and building Word tables, LabsheetFormatMaker automates the entire lifecycle.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/Language-Python_3.12+-blue.svg?style=flat-square&logo=python" alt="Python 3.12+">
+  <img src="https://img.shields.io/badge/Compiler-GCC-darkgreen.svg?style=flat-square" alt="GCC">
+  <img src="https://img.shields.io/badge/Engine-python--docx-blueviolet.svg?style=flat-square" alt="python-docx">
+  <a href="future.md"><img src="https://img.shields.io/badge/roadmap-future.md-blueviolet.svg?style=flat-square" alt="Roadmap"></a>
+</p>
 
-Point the tool at a directory of `.c` files, and it will:
-1.  **Compile** each file dynamically using `gcc`.
-2.  **Actuate sandboxed subprocesses** with randomly generated test inputs (within customized domains).
-3.  **Capture and clean stdout/stderr streams** (intelligently isolating user prompts from actual execution output).
-4.  **Synthesize a highly formatted Microsoft Word document (`.docx`)** with narrow margins, custom fonts (Times New Roman & Courier New), structured code boxes, and dual-column testcase execution matrices.
-5.  **Convert the document to PDF** instantly for immediate submission.
+---
+
+## ⚡ Overview
+
+**LabsheetFormatMaker** is an automated developer tool engineered to **compile, execute, test, and style university programming lab sheets** in seconds. Instead of spending hours manually copying code, running programs, taking terminal screenshots, and wrestling with Word tables, LabsheetFormatMaker automates the entire reporting lifecycle:
+
+1. **Compiles** each `.c` source file dynamically using `gcc`.
+2. **Actuates sandboxed subprocesses** with randomized test inputs.
+3. **Captures and isolates stdout/stderr streams**, stripping user prompt noise.
+4. **Synthesizes a beautifully styled Word document (`.docx`)** with narrow margins, Courier New monospace code containers, and dual-column testcase execution cards.
+5. **Converts the document to PDF** instantly for ready-to-submit laboratory assignments.
 
 ---
 
@@ -46,11 +58,11 @@ flowchart TD
 
 ## ⚡ Core Features
 
-*   **Sandboxed Auto-Execution:** Compiles code on-the-fly and tests it. No need to run programs manually to copy outputs.
-*   **Prompt-Isolation Algorithm:** Identifies common console prompt suffixes (e.g., `"Enter a number: "`) and strips them from testcase output cards, keeping the output clean and professional.
-*   **Courier New Code Blocks:** Wraps code in monospace Courier New blocks inside single-cell border tables, preserving perfect C indentations, spaces, and brackets.
-*   **Times New Roman Question Titles:** Renders academic question headers in structured Times New Roman, matching standard university lab formats.
-*   **Dual-Column Testcase Matrices:** Generates comparative adjacent testcase blocks with custom inputs and their respective runtime outputs.
+*   **Sandboxed Auto-Execution:** Compiles code on-the-fly and runs randomized test cases automatically.
+*   **Prompt-Isolation Algorithm:** Identifies common console prompt suffixes (e.g., `"Enter a number: "`) and strips them from testcase cards.
+*   **Courier New Code Blocks:** Preserves perfect indentation and brackets within framed monospace containers.
+*   **Times New Roman Question Titles:** Renders clean academic question headers adhering to university submission guidelines.
+*   **Dual-Column Testcase Matrices:** Generates side-by-side execution cards displaying inputs, outputs, and execution statuses.
 
 ---
 
@@ -67,44 +79,36 @@ flowchart TD
 
 ## 🚀 Quick Start (Under 30 Seconds)
 
-### 1. Install System Tools
-Ensure you have `gcc` (GNU Compiler Collection) and Python 3.12+ installed on your system.
+### 1. Prerequisites
+Ensure you have `gcc` (GNU Compiler Collection) and Python 3.12+ installed.
 
-### 2. Install Python Dependencies
-Clone this repository and install `python-docx` along with `docx2pdf`:
-
+### 2. Install Dependencies
 ```bash
 git clone https://github.com/seeramsujay/LabsheetFormatMaker.git
 cd LabsheetFormatMaker
-pip install python-docx docx2pdf
+pip install -r requirements.txt
 ```
 
 ### 3. Load Your C Files
 Place all your `.c` source files inside the `lab_folder/` directory:
-
 ```bash
 ls lab_folder/
 # Output: Factorial.c  Fibonacci.c  PrimeCheck.c
 ```
 
 ### 4. Build Your Report
-Run the automation script to generate your report:
-
 ```bash
 python generate_lab_report.py
 ```
-This compiles every C file, runs the test cases, formats the DOCX, and builds:
+This compiles every C file, runs test cases, formats the DOCX, and builds:
 *   `output/lab_report.docx` (editable Microsoft Word report)
 *   `output/lab_report.pdf` (print-ready PDF file)
 
 ---
 
-## 📁 Repository Layout
+## 🔮 Engineering Roadmap
 
-*   `lab_folder/`: Folder where your `.c` files reside. The filename dictates the question title.
-*   `output/`: Contains the generated report outputs and temporary compilation binaries.
-*   `generate_lab_report.py`: The core compiler, subprocess driver, and document writer.
-*   `Lab Report_format.docx`: The baseline reference layout.
+To explore planned features including polyglot support (C++, Python, Rust), Typst sub-50ms PDF compilation, and AST-based academic plagiarism detection, read [future.md](future.md).
 
 ---
 
